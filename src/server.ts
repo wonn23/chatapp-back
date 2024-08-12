@@ -2,7 +2,7 @@ import { createServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import { configureSocket } from './sockets/socket';
 import app from './app';
-import connectMongoDB from './config/database/data-source';
+import { connectMongoDB } from './config/database/data-source';
 import { FRONT_URI, PORT } from './config/env';
 
 // HTTP 서버 생성
@@ -16,7 +16,7 @@ const io = new SocketIOServer(httpServer, {
 });
 
 // 데이터 베이스 연결
-connectMongoDB().catch(console.dir);
+connectMongoDB();
 
 // Socket.IO 서버 생성
 configureSocket(io);
