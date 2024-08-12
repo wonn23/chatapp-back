@@ -1,6 +1,7 @@
 import { model, Schema, Types, SchemaTypes, Document } from 'mongoose';
 
 export interface IChatRoom extends Document {
+  _id: Types.ObjectId;
   name: string;
   participants: Types.ObjectId[];
   createdAt?: Date;
