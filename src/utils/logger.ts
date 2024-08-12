@@ -34,7 +34,8 @@ const logger: Logger = createLogger({
       dirname: logDir, // 파일 경로
       filename: `%DATE%.log`, // 파일 이름
       maxFiles: 30, // 최근 30일치 로그 파일을 남김
-      zippedArchive: true,
+      maxSize: '20m', // 최대 파일 크기 20MB
+      zippedArchive: true, // 압축 설정
     }),
     //* error 레벨 로그를 저장할 파일 설정 (info에 자동 포함되지만 일부러 따로 빼서 설정)
     new winstonDaily({
@@ -43,6 +44,7 @@ const logger: Logger = createLogger({
       dirname: `${logDir}/error`, // /logs/error 하위에 저장
       filename: `%DATE%.error.log`, // 에러 로그는 2020-05-28.error.log 형식으로 저장
       maxFiles: 30,
+      maxSize: '20m',
       zippedArchive: true,
     }),
   ],
@@ -54,6 +56,7 @@ const logger: Logger = createLogger({
       dirname: logDir,
       filename: `%DATE%.exception.log`,
       maxFiles: 30,
+      maxSize: '20m',
       zippedArchive: true,
     }),
   ],
