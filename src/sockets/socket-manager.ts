@@ -1,7 +1,7 @@
 import { Server } from 'http';
 import { Socket } from 'socket.io';
 import { handleDeleteRoom, handleJoinRoom, handleLogin, handleSendMessage } from './chat-socket';
-import { roomMiddleware, userMiddleware } from '../middlewares/socket-middleware';
+import { roomMiddleware, userMiddleware } from '../middlewares/socket.middleware';
 
 export const cofigureSocket = (io: Server) => {
   io.on('connection', (socket: Socket) => {
