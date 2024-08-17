@@ -1,40 +1,42 @@
-import ChatRoom from '../config/database/models/ChatRoom';
+import ChatRoom from '../models/ChatRoom';
 
-export class ChatRoomService {
-  static async create(chatRoomName: string, userId: string) {
+export const ChatRoomService = {
+  async createRoom(title: string, max: number, owner: string) {
     const newChatRoom = new ChatRoom({
-      name: chatRoomName,
-      participants: [userId],
+      title,
+      max,
+      owner,
+      participants: [owner],
     });
     await newChatRoom.save();
     return newChatRoom;
-  }
+  },
 
-  static async findAll() {
+  async findAllRooms() {
     const chatRooms = await ChatRoom.find();
     return chatRooms;
-  }
+  },
 
-  static async findOne(id: string) {
+  async findOneRoom(id: string) {
     const chatRoom = await ChatRoom.findById(id);
     if (!chatRoom) {
       throw new Error('Chat room not found');
     }
     return chatRoom;
-  }
+  },
 
-  static async update(id: string, chatRoomName: string) {
-    const chatRoom = await ChatRoom.findByIdAndUpdate(id, { name: chatRoomName }, { new: true });
+  async updateRoom(id: string, title: string) {
+    const chatRoom = await ChatRoom.findByIdAndUpdate(id, { title }, { new: true });
     if (!chatRoom) {
       throw new Error('Chat room not found');
     }
     return chatRoom;
-  }
+  },
 
-  static async delete(id: string) {
+  async deleteRoom(id: string) {
     const chatRoom = await ChatRoom.findByIdAndDelete(id);
     if (!chatRoom) {
       throw new Error('Chat room not found');
     }
-  }
-}
+  },
+};

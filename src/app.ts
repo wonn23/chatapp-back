@@ -5,7 +5,7 @@ import { morganMiddleware } from './middlewares/morgan';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { errorHandler } from './middlewares/error.middleware';
-
+import chatRoomRoutes from './routes/chatroom.router';
 const app = express();
 
 app.use(helmet());
@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
 });
 
 // 라우트
+app.use('/room', chatRoomRoutes);
 
 // 에러 처리 미들웨어
 app.use(errorHandler);
