@@ -3,7 +3,7 @@ import { Socket } from 'socket.io';
 import { handleDeleteRoom, handleJoinRoom, handleLogin, handleSendMessage } from './chat-socket';
 import { roomMiddleware, userMiddleware } from '../middlewares/socket.middleware';
 
-export const cofigureSocket = (io: Server) => {
+export const configureSocket = (io: Server) => {
   io.on('connection', (socket: Socket) => {
     console.log('New client connected');
 

@@ -1,12 +1,12 @@
-import { createServer } from 'http';
+import { createServer, Server as HTTPServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
-import { configureSocket } from './sockets/socket';
+import { configureSocket } from './sockets/socket-manager';
 import app from './app';
 import { connectMongoDB } from './config/database/data-source';
 import { FRONT_URI, PORT } from './config/env';
 
 // HTTP 서버 생성
-const httpServer = createServer(app);
+const httpServer: HTTPServer = createServer(app);
 
 // Socket.IO 서버 생성
 const io = new SocketIOServer(httpServer, {

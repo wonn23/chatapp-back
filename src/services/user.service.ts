@@ -1,6 +1,6 @@
 import User, { IUser } from '../models/User';
 
-export const userController = {
+export const UserService = {
   async saveUser(username: string, sid: string): Promise<IUser | null> {
     try {
       let user = await User.findOne({ name: username });
@@ -17,7 +17,6 @@ export const userController = {
       }
 
       await user.save();
-      console.log('User saved successfully', user);
       return user;
     } catch (error) {
       console.error('Error saving user:', error);
