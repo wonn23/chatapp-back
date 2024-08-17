@@ -4,6 +4,7 @@ import express from 'express';
 import { morganMiddleware } from './middlewares/morgan';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { errorHandler } from './middlewares/error.middleware';
 
 const app = express();
 
@@ -28,10 +29,9 @@ app.get('/', (req, res) => {
   res.send('안녕하세요, 기본 페이지입니다.');
 });
 
+// 라우트
+
 // 에러 처리 미들웨어
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error(err.stack);
-  res.status(500).send('서버 에러가 발생했습니다.');
-});
+app.use(errorHandler);
 
 export default app;
