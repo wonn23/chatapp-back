@@ -5,7 +5,7 @@ import { ChatRoomService } from '../services/chat-room.service';
 export const ChatRoomController = {
   async create(req: Request, res: Response, next: NextFunction) {
     const { title, max, owner } = req.body;
-    console.log(title, max, owner);
+
     try {
       const chatRoom = await ChatRoomService.createRoom(title, parseInt(max), owner);
       res.status(201).json(chatRoom);

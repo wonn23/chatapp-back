@@ -17,6 +17,7 @@ export const UserService = {
       }
 
       await user.save();
+      console.log('Successfuly create user: ', user);
       return user;
     } catch (error) {
       console.error('Error saving user:', error);
