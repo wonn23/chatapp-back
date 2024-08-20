@@ -1,24 +1,31 @@
-import { IChatRoom } from '../models/ChatRoom';
-import Message from '../models/Message';
-import { IUser } from '../models/User';
+import Message, { IMessage } from '../models/Message';
 
 export const MessageService = {
-  async saveMessage(chatRoom: IChatRoom, user: IUser, message: string) {
+  saveMessage: async (roomId: string, userId: string, text: string): Promise<IMessage> => {
     try {
       const newMessage = new Message({
-        chatRoom: {
-          id: chatRoom._id,
-          name: chatRoom.title,
-        },
-        sender: {
-          id: user._id,
-          name: user.name,
-        },
-        message,
+        roomId,
+        userId,
+        text,
+        createdAt: new Date(),
       });
 
       await newMessage.save();
       return newMessage;
+    } catch (error) {
+      console.error('Error saving message:', error);
+      throw error;
+    }
+  },
+
+  // 특정 채팅방의 메시지 가져오기
+  getRoomMessages: async (roomId: string): Promise<IMessage[]> => {
+    try {
+      const messages = await Message.find({ roomId })
+        .populate('userId', 'name profilePicture') // 유저 정보 추가
+        .sort({ createdAt: 1 }); // 생성된 시간 순으로 정렬
+
+      return messages || [];
     } catch (error) {
       console.error('Error saving message:', error);
       throw error;

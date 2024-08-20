@@ -5,6 +5,7 @@ export interface IUser extends Document {
   name: string;
   token: string;
   online: boolean;
+  profilePicture: string;
 }
 
 const Schema = mongoose.Schema;
@@ -22,6 +23,7 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  profilePicture: { type: String },
 });
 
 export default mongoose.model<IUser>('User', userSchema);
